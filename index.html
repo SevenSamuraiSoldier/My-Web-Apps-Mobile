@@ -533,6 +533,11 @@
                 category: {type: "datalist", text: "Category", filter: true, styling: "main", defaultOptions: "-, Movie & Series, Books & Audiobooks"}
             };
 
+            const sortBy = "title";
+            const sortOrder = "asc";
+
+        //////////////////////////////////////////////////////////////////////////////////////////////
+
             console.log("Collection Name: " + collectionName);
             const prefixCountText = "No. of Entries:";
 
@@ -789,7 +794,8 @@
                     populateMenuOptions();
                     // Adds Event Listerners to Datalist Inputs in Add/Edit Modal Form
                     addEvtListenerToAddNewOptions();
-                    const query = db.collection(collectionName).orderBy("timestamp", "desc");
+                    const query = db.collection(collectionName).orderBy(sortBy, sortOrder);
+                    // const query = db.collection(collectionName).orderBy("title", "asc").orderBy("timestamp", "desc");
                     query.onSnapshot(
                         (snapshot) => {
                             allDocs = snapshot.docs.filter((doc) => doc.id !== "menuOptions");
